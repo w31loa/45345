@@ -1,8 +1,9 @@
 
-import {Model, Table, Column, DataType, BelongsToMany} from 'sequelize-typescript'
+import {Model, Table, Column, DataType, BelongsToMany, HasMany} from 'sequelize-typescript'
 import {ApiProperty} from '@nestjs/swagger'
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
+import { Post } from 'src/posts/posts.model';
 
 interface UserCreationAttrs{ //описываем обязательные поля для создания объекта
     email:string;
@@ -33,4 +34,7 @@ export class User extends Model<User , UserCreationAttrs>{
 
     @BelongsToMany( ()=> Role , ()=> UserRoles) //в этом декораторе указываем с какой таблицей делаем связь и через какую таблицу (связь многие ко многим)
     roles:Role[];
+
+    @HasMany(()=>Post)
+    posts: Post[]
 }

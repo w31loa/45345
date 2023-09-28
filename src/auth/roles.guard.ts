@@ -15,7 +15,7 @@ export class RolesGuard implements CanActivate{
         const req = context.switchToHttp().getRequest()
 
         try {
-            const requiredRoles = this.reflector.getAllAndOverride(ROLES_KEY , [context.getHandler() , context.getClass()])
+            const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY , [context.getHandler() , context.getClass()])
 
             if(!requiredRoles){
             console.log(`Привет`)
